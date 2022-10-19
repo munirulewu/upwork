@@ -1,0 +1,61 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model CBot
+
+   <form method="post">
+       <div class="border p-3 mt-4">
+           <div class="row pb-2">
+               <h2 class="text-primary">Create Bot</h2>
+               <hr />
+           </div>
+           <div asp-validation-summary="All"></div>
+           <div class="mb-3">
+               <label asp-for="Message.MessageName"></label>
+               <select id="ddlMessage" class="form-control" asp-for="MessageID" asp-items="@(new SelectList(@ViewBag.MessageList,"MessageID", "MessageName"))">
+               </select>
+               <span asp-validation-for="Message.MessageName" class="text-danger"></span>
+           </div>
+           <div class="mb-3">
+               <label asp-for="botid"></label>
+               <input asp-for="botid" class="form-control" />
+               <span asp-validation-for="botid" class="text-danger"></span>
+           </div>
+           <div class="mb-3">
+               <label asp-for="botname"></label>
+               <input asp-for="botname" class="form-control" />
+               <span asp-validation-for="botname" class="text-danger"></span>
+           </div>
+           <div class="mb-3">
+               <label asp-for="buySell.BuySellStatus"></label>
+               <select id="ddlBuySellStatus" class="form-control" asp-for="BuyselId" asp-items="@(new SelectList(ViewBag.BuySellList,"BuyselId", "BuySellStatus"))">
+               </select>
+               <span asp-validation-for="buySell.BuySellStatus" class="text-danger"></span>
+           </div>
+           <div class="mb-3">
+               <label asp-for="baseordersize"></label>
+               <input asp-for="baseordersize" class="form-control" />
+               <span asp-validation-for="baseordersize" class="text-danger"></span>
+           </div>
+           <div class="mb-3">
+               <label asp-for="Pairs"></label>
+               <input asp-for="Pairs" class="form-control" />
+               <span asp-validation-for="Pairs" class="text-danger"></span>
+           </div>
+           <div class="mb-3">
+               <label asp-for="delay"></label>
+               <input asp-for="delay" class="form-control" />
+               <span asp-validation-for="delay" class="text-danger"></span>
+           </div>
+           <div class="mb-3">
+               <label asp-for="Status.ActiveStatus"></label>
+               <select id="ddlActiveStatus" class="form-control" asp-for="StatusId" asp-items="@(new SelectList(ViewBag.StatusList,"StatusId", "ActiveStatus"))">
+               </select>
+               <span asp-validation-for="Status.ActiveStatus" class="text-danger"></span>
+           </div>
+           <button type="submit" class="btn btn-primary" style="width:150px">Create</button>
+           <a asp-controller="Bot" asp-action="Index" class="btn btn-secondary" style="width:150px">Back to List</a>
+       </div>
+    </form>

@@ -1,0 +1,69 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@{
+    int counter = 0;
+}
+@model List<CAlert>
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Alert List</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Alert" asp-action="Summary" class="btn btn-primary">
+                View Summary
+            </a>
+            <a asp-controller="Alert" asp-action="Create" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i>&nbsp;Create New Alert
+            </a>
+        </div>
+
+    </div>
+
+    <div class="container p-3">
+        <br /><br />
+        <table class="table table-striped table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Rule</th>
+                    <th>Trigger</th>
+                    <th>NoOfAlert</th>
+                    <th>Current%</th>
+                    <th>Target%</th>
+                    <th>Alert Message</th>
+                    <th>LastTrueDate</th>
+                    @*<th>Actions</th>*@
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var Alert in Model)
+                {
+                    counter = counter + 1;
+                    <tr>
+                        <td>@counter</td>
+                        <td>@Alert.Rule.RuleName</td>
+                        <td>@Alert.NoOFTrigger</td>
+                        <td>@Alert.NoOFAlert</td>
+                        <td>@Alert.CurrentPercent</td>
+                        <td>@Alert.Rule.Target</td>
+                        <td>@Alert.Message.MessageName</td>
+                        <td>@Alert.LastTrueDate</td>
+
+                        @*<td>
+                            <a asp-action="Edit" asp-route-alertId="@Alert.alertId" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                            <a asp-action="Delete" asp-route-alertId="@Alert.alertId" class="delete" title="Delete" data-toggle="tooltip" data-bs-target="#exampleModal" onclick="return confirm('Are you sure you want to delete this?')"><i class="material-icons">&#xE872;</i></a>
+                        </td>*@
+                    </tr>
+                }
+
+
+
+        </table>
+    </div>
+</div>

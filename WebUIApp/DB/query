@@ -1,0 +1,31 @@
+ select ai.ruleid, ai.messageid,count(ai.ruleid) ttlMsg,count(ai.messageid) triggerNo, count(api.messageid) totalalertmsgNo, 
+  (select target from ruleinfo where ruleid = ai.ruleid) target,round(count(api.messageid)*100.0/count(ai.messageid),2) currentp  
+  from alertinfo ai left join(select wh.*, mg.messageid from tradeviewAlert_api wh, messageinfo mg 
+   where wh.messagecode = mg.messagecode) api 
+   on api.messageid = ai.messageid group by ai.ruleid, target,ai.messageid;
+   
+
+ select ai.ruleid, ai.messageid, api.messageid alertNo, 
+  (select target from ruleinfo where ruleid = ai.ruleid) target  
+  from alertinfo ai left join(select wh.*, mg.messageid from tradeviewAlert_api wh, messageinfo mg 
+   where wh.messagecode = mg.messagecode) api 
+   on api.messageid = ai.messageid ;
+   
+
+select * from botinfo;
+select * from alertinfo;
+
+select wh.*, mg.messageid from tradeviewAlert_api wh, messageinfo mg 
+  where wh.messagecode = mg.messagecode;
+  
+
+select a.ruleid,a.messageid,b.botid, b.buyselid,
+(select bstype from buysell where buyselid=b.buyselid) bstype
+ from alertinfo a, botinfo b where a.messageid=b.messageid and  a.ruleid=1 and b.statusId=2;
+ 
+update alertinfo set lastTruedate=Datetime('Now') where messageid=(select messageid from messageinfo where messagecode='MG4');
+
+
+select
+ap.messagecode,
+ count(ap.messagecode) from tradeviewAlert_api ap, messageinfo m where ap.messagecode=m.messagecode group by ap.messagecode

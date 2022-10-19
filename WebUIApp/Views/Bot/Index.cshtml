@@ -1,0 +1,65 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    int counter = 0;
+}
+
+@model List<CBot>
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Bot List</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Bot" asp-action="Create" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i>&nbsp;Create New Bot
+            </a>
+        </div>
+    </div>
+
+    <div class="container p-3">
+        <br /><br />
+        <table class="table table-striped table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Status</th>
+                    <th>Message</th>
+                    <th>BotID</th>
+                    <th>BotName</th>
+                    <th>BuySell</th>
+                    <th>BaseOrderSize</th>
+                    <th>Pairs</th>
+                    <th>Delay</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var oBot in Model)
+                {
+                    counter = counter + 1;
+                <tr>
+                    <td>@counter</td>
+                    <td>@oBot.Status.ActiveStatus</td>
+                    <td>@oBot.Message.MessageName</td>
+                    <td>@oBot.botid</td>
+                    <td>@oBot.botname</td>
+                    <td>@oBot.buySell.BuySellStatus</td>
+                    <td>@oBot.baseordersize</td>
+                    <td>@oBot.Pairs</td>
+                    <td>@oBot.delay</td>
+                    
+                    <td>
+                        <a asp-action="Edit" asp-route-Id="@oBot.id" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                        <a asp-action="Delete" asp-route-botid="@oBot.id" class="delete" title="Delete" data-toggle="tooltip" data-bs-target="#exampleModal" onclick="return confirm('Are you sure you want to delete this?')"><i class="material-icons">&#xE872;</i></a>
+                    </td>
+                </tr>
+                }
+
+
+
+        </table>
+    </div>
+</div>
